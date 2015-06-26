@@ -49,7 +49,7 @@ module GraphvizAasm
   AASM::Core::Event.class_eval do
     def draw(graph)
       transitions.each do |transition|
-        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: self.name.to_s.humanize)
+        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: self.name.to_s.humanize.prepend(' '))
       end
     end
   end
