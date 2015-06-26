@@ -29,7 +29,7 @@ module GraphvizAasm
 
   AASM::Core::State.class_eval do
     def draw(graph)
-      node = graph.add_nodes(self.human_name, shape: final? ? "doublecircle" : "ellipse")
+      node = graph.add_nodes(self.name.to_s.humanize, shape: final? ? "doublecircle" : "ellipse")
       graph.add_edge(graph.add_nodes("starting_state", shape: "point"), node) if initial?
     end
 
@@ -49,7 +49,7 @@ module GraphvizAasm
   AASM::Core::Event.class_eval do
     def draw(graph)
       transitions.each do |transition|
-        graph.add_edge(transition.from.to_s.capitalize, transition.to.to_s.capitalize)
+        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: self.name.to_s.humanize)
       end
     end
   end
